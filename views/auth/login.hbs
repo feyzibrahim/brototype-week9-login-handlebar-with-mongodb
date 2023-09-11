@@ -1,0 +1,31 @@
+<div class="d-flex align-items-center justify-content-center">
+  <div class="p-5 rounded shadow-lg">
+    <h1 class="text-center mb-4">Login Page</h1>
+
+    <form action="/auth/login" method="POST">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+          placeholder="Enter your username"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+        />
+      </div>
+      <p class="text-danger"></p>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+      <a class="text-decoration-none" href="/auth/signup">New user? Signup</a>
+    </form>
+  </div>
+</div>

@@ -1,11 +1,18 @@
 const express = require("express");
-const path = require("path");
 const hbs = require("express-handlebars");
 
+// Invoking express
 const app = express();
 
+// importing routes
+const authRoutes = require("./routes/auth");
+
+// middleware for reading body data
 app.use(express.urlencoded({ extended: true }));
-app.set("view engine", hbs);
+
+// View Engine configuration
+app.set("view engine", "hbs");
+app.use(express.static(__dirname + "/public"));
 app.engine(
   "hbs",
   hbs.engine({
@@ -16,26 +23,16 @@ app.engine(
   })
 );
 
+// Home page rendering
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/views/index.html"));
+  res.render("index", { title: "Something" });
 });
 
-app.get("/login", (req, res) => {
-  res.sendFile(__dirname + "/views/form.html");
-});
-
-app.post("/login", (req, res) => {
-  let { name, email } = req.body;
-
-  if (name === "Ajwa" && email === "ajwa@gmail.com") {
-    res.sendFile(__dirname + "/views/home.html");
-  } else {
-    res.send("User details not valid");
-  }
-});
+// Login & Signup Routes
+app.use("/auth", authRoutes);
 
 app.use((req, res) => {
-  res.sendFile(__dirname + "/views/404.html");
+  res.render("404");
 });
 
 app.listen(4000, () => {
