@@ -1,0 +1,1 @@
+const verifyAuth = (req, res);

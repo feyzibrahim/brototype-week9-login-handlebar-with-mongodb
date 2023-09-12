@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <h1>Create Blog Post</h1>
+  <form action="/blog/create-post" method="POST">
+    <!-- Blog Title Input -->
+    <div class="form-group">
+      <label for="blogTitle">Blog Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="blogTitle"
+        name="blogTitle"
+        required
+      />
+    </div>
+    <!-- Blog Snippet Input -->
+    <div class="form-group">
+      <label for="blogTitle">Blog Snippet</label>
+      <input
+        type="text"
+        class="form-control"
+        id="blogSnippet"
+        name="blogSnippet"
+        required
+      />
+    </div>
+
+    <!-- Blog Content Textarea -->
+    <div class="form-group">
+      <label for="blogContent">Blog Content</label>
+      <textarea
+        class="form-control"
+        id="blogContent"
+        name="blogContent"
+        rows="5"
+        required
+      ></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Create Blog</button>
+  </form>
+</div>
