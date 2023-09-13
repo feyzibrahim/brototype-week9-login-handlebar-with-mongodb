@@ -1,5 +1,23 @@
 <div class="container mt-5">
-  <h1>Admin Dashboard</h1>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>Admin Dashboard</h1>
+    <div>
+      <a href="/admin/newUser" class="btn btn-primary"> Create New User</a>
+    </div>
+  </div>
+
+  <!-- Search Form -->
+  <form action="/admin/search" method="GET" class="my-4">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        name="search"
+        placeholder="Search Users"
+      />
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
 
   <!-- User Count -->
   <div class="mb-4">
@@ -16,7 +34,6 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Dummy Data for 3 Users -->
       {{#each users}}
         <tr>
           <td>{{this.name}}</td>
@@ -32,10 +49,7 @@
             >Delete</a>
           </td>
         </tr>
-
       {{/each}}
-
-      <!-- End of Dummy Data -->
     </tbody>
   </table>
 </div>

@@ -1,0 +1,54 @@
+<div
+  class="container-fluid bg-gray-100 d-flex align-items-center justify-content-center"
+>
+  <div class="bg-white shadow-lg rounded px-5 py-3 mt-4 mx-5 mx-lg-0">
+    <h2 class="text-center font-weight-bold mb-4">Edit User</h2>
+    <form method="post" action="/admin/edit/{{user._id}}">
+      <div class="mb-3">
+        <label class="form-label" for="name">Name</label>
+        <input
+          class="form-control"
+          id="name"
+          name="name"
+          type="text"
+          value="{{user.name}}"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="email">Email</label>
+        <input
+          class="form-control"
+          id="email"
+          name="email"
+          type="email"
+          value="{{user.email}}"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="password">Set New Password
+          <span class="text-secondary">Optional</span></label>
+        <input
+          class="form-control"
+          id="password"
+          name="password"
+          type="password"
+        />
+      </div>
+
+      <p class="text-danger">{{err}}</p>
+
+      <div class="text-center">
+        <p class="text-danger">{{err}}</p>
+        <button class="container btn btn-primary mb-2" type="submit">
+          Save
+        </button>
+        <a
+          class="container text-decoration-none btn btn-danger"
+          href="/"
+        >Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
