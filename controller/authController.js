@@ -33,8 +33,9 @@ const loginUser = async (req, res) => {
       throw "Wrong password";
     }
 
-    req.session.username = username;
+    req.session.username = user.email;
     req.session.isAuth = true;
+    req.session.roll = user.roll;
 
     res.redirect("/");
   } catch (error) {
@@ -92,13 +93,13 @@ const signupUser = async (req, res) => {
         email: email,
         password: hash,
         date: Date.now(),
-        roll: "User",
+        roll: "user",
       })
       .then(() => {
         // Setting session for route
         req.session.username = email;
         req.session.isAuth = true;
-        req.session.roll = "User";
+        req.session.roll = "user";
 
         // Redirecting to home
         res.redirect("/");

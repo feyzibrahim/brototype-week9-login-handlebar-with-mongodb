@@ -1,0 +1,41 @@
+<div class="container mt-5">
+  <h1>Admin Dashboard</h1>
+
+  <!-- User Count -->
+  <div class="mb-4">
+    <h3>Total Users: {{count}}</h3>
+  </div>
+
+  <!-- Users Table -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Dummy Data for 3 Users -->
+      {{#each users}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td>{{this.email}}</td>
+          <td>
+            <a
+              href="/admin/edit/{{this._id}}"
+              class="btn btn-primary btn-sm"
+            >Edit</a>
+            <a
+              href="/admin/delete/{{this._id}}"
+              class="btn btn-danger btn-sm"
+            >Delete</a>
+          </td>
+        </tr>
+
+      {{/each}}
+
+      <!-- End of Dummy Data -->
+    </tbody>
+  </table>
+</div>

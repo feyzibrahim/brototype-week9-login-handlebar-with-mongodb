@@ -9,6 +9,15 @@ const {
 
 const router = express.Router();
 
+router.use((req, res, next) => {
+  res.setHeader(
+    "Cache-Control",
+    "no-store, no-cache, must-revalidate, private"
+  );
+  res.setHeader("Pragma", "no-cache");
+  next();
+});
+
 router.get("/login", getLoginPage);
 
 router.post("/login", loginUser);

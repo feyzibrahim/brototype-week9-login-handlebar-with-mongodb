@@ -7,7 +7,11 @@ router.get("/", (req, res) => {
   if (!req.session.isAuth) {
     res.render("index", { isLoggedIn: false });
   } else {
-    res.render("blog/home", { isLoggedIn: true, blogData: blogData });
+    if (req.session.roll === "admin") {
+      res.redirect("/admin");
+    } else {
+      res.render("blog/home", { isLoggedIn: true, blogData: blogData });
+    }
   }
 });
 

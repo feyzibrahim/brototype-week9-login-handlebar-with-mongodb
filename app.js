@@ -41,6 +41,7 @@ app.engine(
 const authRoutes = require("./routes/auth");
 const indexRoutes = require("./routes/index");
 const blogRoutes = require("./routes/blog");
+const adminRoutes = require("./routes/admin");
 
 // Home page Route
 app.get("/", indexRoutes);
@@ -48,7 +49,11 @@ app.get("/", indexRoutes);
 // Login & Signup Routes
 app.use("/auth", authRoutes);
 
+// User Home routes
 app.use("/blog", blogRoutes);
+
+// Admin Routes
+app.use("/admin", adminRoutes);
 
 app.use((req, res) => {
   res.render("404");
