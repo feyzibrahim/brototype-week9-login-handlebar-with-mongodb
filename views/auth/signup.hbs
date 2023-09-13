@@ -3,24 +3,49 @@
 >
   <div class="bg-white shadow-lg rounded px-5 py-3 mt-4 mx-5 mx-lg-0">
     <h2 class="text-center font-weight-bold mb-4">Sign Up</h2>
-    <form method="post" action="/signup">
+    <form method="post" action="/auth/signup">
       <div class="mb-3">
         <label class="form-label" for="name">Name</label>
-        <input class="form-control" id="name" type="text" required />
+        <input
+          class="form-control"
+          id="name"
+          name="name"
+          type="text"
+          required
+        />
       </div>
       <div class="mb-3">
         <label class="form-label" for="email">Email</label>
-        <input class="form-control" id="email" type="email" required />
+        <input
+          class="form-control"
+          id="email"
+          name="email"
+          type="email"
+          required
+        />
       </div>
       <div class="mb-3">
         <label class="form-label" for="password">Password</label>
-        <input class="form-control" id="password" type="password" required />
+        <input
+          class="form-control"
+          id="password"
+          name="password"
+          type="password"
+          required
+        />
       </div>
       <div class="mb-3">
         <label class="form-label" for="passwordA">Confirm Password</label>
-        <input class="form-control" id="passwordA" type="password" required />
+        <input
+          class="form-control"
+          id="passwordA"
+          name="passwordA"
+          type="password"
+          required
+        />
       </div>
       <div class="text-center">
+        <p class="text-danger">{{err}}</p>
         <button class="container btn btn-primary mb-2" type="submit">
           Sign Up
         </button>

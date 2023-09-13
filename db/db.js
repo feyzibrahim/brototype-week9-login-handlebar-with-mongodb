@@ -1,3 +1,5 @@
+const { MongoClient } = require("mongodb");
+
 const blogData = [
   {
     title: "Blog Post Title 1",
@@ -49,4 +51,20 @@ const blogData = [
   },
 ];
 
-module.exports = { blogData };
+let dbConnection;
+
+let connectToDB = async (cb) => {
+  await MongoClient.connect("mongodb://127.0.0.1:27017/loginApp") // is a promise
+    .then((client) => {
+      dbConnection = client.db();
+      console.log("Connected to db");
+      return cb(); // callback function
+    })
+    .catch((err) => {
+      console.log(err);
+      return cb(err);
+    });
+};
+let getDb = () => dbConnection;
+
+module.exports = { blogData, connectToDB, getDb };

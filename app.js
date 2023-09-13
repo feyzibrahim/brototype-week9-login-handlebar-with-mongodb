@@ -2,6 +2,7 @@ const express = require("express");
 const hbs = require("express-handlebars");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const { connectToDB } = require("./db/db");
 
 // Invoking express
 const app = express();
@@ -21,6 +22,7 @@ app.use(
 
 // middleware for reading body data
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // View Engine configuration
 app.set("view engine", "hbs");
@@ -52,6 +54,12 @@ app.use((req, res) => {
   res.render("404");
 });
 
-app.listen(4000, () => {
-  console.log("Server Started");
+connectToDB((err) => {
+  if (!err) {
+    app.listen(4000, () => {
+      console.log("Server started");
+    });
+  } else {
+    console.log(err);
+  }
 });
