@@ -5,21 +5,47 @@ const validator = require("validator");
 
 const getUsersList = async (req, res) => {
   const db = getDb();
-  const count = await db.collection("user").countDocuments({ roll: "user" });
-  const users = [];
-  db.collection("user")
-    .find({ roll: "user" })
-    .forEach((user) => users.push(user))
-    .then(() => {
-      res.render("admin/home", {
-        isLoggedIn: true,
-        count: count,
-        users: users,
-      });
-    })
-    .catch((error) => {
-      res.render("auth/login", { err: error });
+  const roll = "user"; // You can change this to match your user role criteria.
+
+  // Check if a search query parameter exists in the request.
+  const searchQuery = req.query.search;
+
+  if (searchQuery) {
+    // If there's a search query, perform a search.
+    const count = await db.collection("user").countDocuments({
+      roll,
+      $or: [
+        { name: { $regex: searchQuery, $options: "i" } }, // Case-insensitive search on name
+        { email: { $regex: searchQuery, $options: "i" } }, // Case-insensitive search on email
+      ],
     });
+    const users = await db
+      .collection("user")
+      .find({
+        roll,
+        $or: [
+          { name: { $regex: searchQuery, $options: "i" } }, // Case-insensitive search on name
+          { email: { $regex: searchQuery, $options: "i" } }, // Case-insensitive search on email
+        ],
+      })
+      .toArray();
+
+    res.render("admin/home", {
+      isLoggedIn: true,
+      count: count,
+      users: users,
+    });
+  } else {
+    // If no search query, return all data.
+    const count = await db.collection("user").countDocuments({ roll });
+    const users = await db.collection("user").find({ roll }).toArray();
+
+    res.render("admin/home", {
+      isLoggedIn: true,
+      count: count,
+      users: users,
+    });
+  }
 };
 
 const deleteUser = (req, res) => {
