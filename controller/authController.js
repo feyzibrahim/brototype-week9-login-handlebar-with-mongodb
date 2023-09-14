@@ -23,12 +23,14 @@ const loginUser = async (req, res) => {
     const db = getDb();
     const user = await db.collection("user").findOne({ email: username });
 
+    // Checking if the email is invalid
     if (!user) {
       throw "User is not registered";
     }
 
     const match = await bcrypt.compare(password, user.password);
 
+    // Checking if password is correct
     if (!match) {
       throw "Wrong password";
     }
@@ -52,6 +54,7 @@ const getSignupPage = (req, res) => {
   }
 };
 
+// User creation or signing up a user
 const signupUser = async (req, res) => {
   try {
     const { name, email, password, passwordA } = req.body;

@@ -1,3 +1,6 @@
+// dotenv is required
+require("dotenv").config();
+
 const express = require("express");
 const hbs = require("express-handlebars");
 const cookieParser = require("cookie-parser");
@@ -11,7 +14,7 @@ const app = express();
 app.use(cookieParser());
 app.use(
   session({
-    secret: "Hello World",
+    secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: true,
     cookie: {
@@ -61,7 +64,7 @@ app.use((req, res) => {
 
 connectToDB((err) => {
   if (!err) {
-    app.listen(4000, () => {
+    app.listen(process.env.DEV_PORT, () => {
       console.log("Server started");
     });
   } else {

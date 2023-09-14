@@ -11,8 +11,11 @@ const {
 
 const router = express.Router();
 
+// Middleware for verifying the user is logged in.
+
 router.use(verifyAuth);
 
+// Different routes
 router.get("/", getUsersList);
 
 router.get("/delete/:id", deleteUser);

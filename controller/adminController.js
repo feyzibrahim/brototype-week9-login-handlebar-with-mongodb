@@ -3,20 +3,21 @@ const { ObjectId } = require("mongodb");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 
+// Controller function for getting all the users list
 const getUsersList = async (req, res) => {
   const db = getDb();
-  const roll = "user"; // You can change this to match your user role criteria.
+  const roll = "user";
 
-  // Check if a search query parameter exists in the request.
+  // getting search query from request
   const searchQuery = req.query.search;
 
+  // If there's a search query, perform a search.
   if (searchQuery) {
-    // If there's a search query, perform a search.
     const count = await db.collection("user").countDocuments({
       roll,
       $or: [
-        { name: { $regex: searchQuery, $options: "i" } }, // Case-insensitive search on name
-        { email: { $regex: searchQuery, $options: "i" } }, // Case-insensitive search on email
+        { name: { $regex: searchQuery, $options: "i" } }, // Case-insensitive
+        { email: { $regex: searchQuery, $options: "i" } }, // Case-insensitive
       ],
     });
     const users = await db
@@ -24,8 +25,8 @@ const getUsersList = async (req, res) => {
       .find({
         roll,
         $or: [
-          { name: { $regex: searchQuery, $options: "i" } }, // Case-insensitive search on name
-          { email: { $regex: searchQuery, $options: "i" } }, // Case-insensitive search on email
+          { name: { $regex: searchQuery, $options: "i" } }, // Case-insensitive
+          { email: { $regex: searchQuery, $options: "i" } }, // Case-insensitive
         ],
       })
       .toArray();
@@ -48,6 +49,7 @@ const getUsersList = async (req, res) => {
   }
 };
 
+// Controller function for deleting a user
 const deleteUser = (req, res) => {
   const { id } = req.params;
   const db = getDb();
@@ -62,6 +64,7 @@ const deleteUser = (req, res) => {
     });
 };
 
+// Controller function for editing one user
 const editUser = async (req, res) => {
   const { id } = req.params;
   const db = getDb();
@@ -74,6 +77,7 @@ const editUser = async (req, res) => {
   }
 };
 
+// Controller function for saving the changes into db of a user
 const updateUser = async (req, res) => {
   const { id } = req.params;
   const db = getDb();
@@ -98,10 +102,12 @@ const updateUser = async (req, res) => {
   res.redirect("/");
 };
 
+// Create use page route
 const newUser = (req, res) => {
   res.render("admin/newUser");
 };
 
+// User creation and saving to db route
 const createNewUser = async (req, res) => {
   try {
     const { name, email, password, passwordA } = req.body;

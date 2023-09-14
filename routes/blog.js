@@ -2,6 +2,7 @@ const express = require("express");
 const { verifyAuth } = require("../middleware/auth");
 const router = express.Router();
 
+// Middleware for verifying the user is logged in.
 router.use(verifyAuth);
 
 // Getting create-post page

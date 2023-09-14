@@ -54,7 +54,7 @@ const blogData = [
 let dbConnection;
 
 let connectToDB = async (cb) => {
-  await MongoClient.connect("mongodb://127.0.0.1:27017/loginApp") // is a promise
+  await MongoClient.connect(process.env.MONGO_URI) // is a promise
     .then((client) => {
       dbConnection = client.db();
       console.log("Connected to db");

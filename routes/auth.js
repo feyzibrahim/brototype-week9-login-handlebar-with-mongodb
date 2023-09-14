@@ -9,6 +9,7 @@ const {
 
 const router = express.Router();
 
+// Clearing cache to avoid going back to login or signup page after log-in
 router.use((req, res, next) => {
   res.setHeader(
     "Cache-Control",

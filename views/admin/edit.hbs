@@ -3,6 +3,8 @@
 >
   <div class="bg-white shadow-lg rounded px-5 py-3 mt-4 mx-5 mx-lg-0">
     <h2 class="text-center font-weight-bold mb-4">Edit User</h2>
+
+    {{! Editing for for user data }}
     <form method="post" action="/admin/edit/{{user._id}}">
       <div class="mb-3">
         <label class="form-label" for="name">Name</label>
@@ -37,6 +39,7 @@
         />
       </div>
 
+      {{! Error Message if there is any error in saving }}
       <p class="text-danger">{{err}}</p>
 
       <div class="text-center">

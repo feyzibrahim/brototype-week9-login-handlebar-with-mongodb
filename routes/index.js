@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const { blogData } = require("../db/db");
 
+// Only route here so no controller function
 router.get("/", (req, res) => {
   if (!req.session.isAuth) {
     res.render("index", { isLoggedIn: false });
